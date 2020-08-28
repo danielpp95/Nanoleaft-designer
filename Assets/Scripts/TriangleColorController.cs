@@ -5,11 +5,13 @@ public class TriangleColorController : MonoBehaviour
 {
     public Triangle Selected;
     public Slider ColorSlider;
+    public Button WhiteButton;
 
     // Start is called before the first frame update
     void Start()
     {
         this.ColorSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
+        this.WhiteButton.onClick.AddListener(delegate { SetToWhiteColor(); });
     }
 
     public void SelectTriangle(Triangle triangle)
@@ -76,5 +78,15 @@ public class TriangleColorController : MonoBehaviour
         var b = 255 * (1 - (float)cmk.Y / 100) * (1);
 
         return new Color32((byte)r, (byte)g, (byte)b, 1);
+    }
+
+    private void SetToWhiteColor()
+    {
+        this.Selected.Colors.SliderValue = 0;
+        this.Selected.Colors.CMYK = new CMYK(0, 0, 0, 0);
+        this.Selected.Colors.Color = Color.white;
+        this.ColorSlider.value = 0;
+
+        this.Selected.ChangeColor();
     }
 }
