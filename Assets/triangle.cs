@@ -40,8 +40,7 @@ public class triangle : MonoBehaviour
         string name)
     {
         var point = this.GetPoint(name);
-        Debug.Log(point);
-        Debug.Log(Position);
+
         var tilemapController = GameObject.FindObjectOfType<TileMapController>();
         var tile = tilemapController.GetTile(point.x, point.y);
 
@@ -70,8 +69,6 @@ public class triangle : MonoBehaviour
 
     private Vector2Int GetPoint(string name)
     {
-        Debug.Log(this.Position);
-        Debug.Log(this.transform.rotation.eulerAngles.z);
         // 0
         if (this.transform.rotation.eulerAngles.z >= -10 &&
             this.transform.rotation.eulerAngles.z <= 20)
@@ -164,5 +161,10 @@ public class triangle : MonoBehaviour
         }
 
         return Vector2Int.zero;
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("click");
     }
 }
