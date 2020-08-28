@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class plusButton : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class plusButton : MonoBehaviour
     internal Quaternion rotation = new Quaternion();
     internal Vector3 position = Vector3.zero;
 
+    // 0 connector
+    // 1 left
+    // 2 right
+    internal Byte order;
+
     public void AddTriangle()
     {
         var triangleGO = Instantiate(
@@ -21,6 +27,21 @@ public class plusButton : MonoBehaviour
         var trianglePF = triangleGO.GetComponent<Triangle>();
         trianglePF.parent = this.parent;
         trianglePF.Position = this.Position;
+
+        if (this.order == 0)
+        {
+            this.parent.GetComponent<Connector>().Child = triangleGO;
+        }
+
+        if (this.order == 1)
+        {
+            this.parent.GetComponent<Triangle>().leftChild = triangleGO;
+        }
+        if (this.order == 2)
+        {
+            this.parent.GetComponent<Triangle>().rightChild = triangleGO;
+        }
+
         trianglePF.Initialize();
 
 

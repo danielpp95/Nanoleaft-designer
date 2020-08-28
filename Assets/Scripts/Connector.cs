@@ -7,7 +7,6 @@ public class Connector : MonoBehaviour
 
     public Vector2Int Position;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +14,7 @@ public class Connector : MonoBehaviour
         var button = buttonGO.GetComponent<plusButton>();
         button.parent = this.gameObject;
         button.Position = new Vector2Int(this.Position.x, this.Position.y + 1);
+        button.order = 0;
 
         var tilemapController = GameObject.FindObjectOfType<TileMapController>();
         tilemapController.SetTile(

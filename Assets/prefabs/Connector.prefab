@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 884212102998691478}
   m_Layer: 0
   m_Name: Connector
-  m_TagString: Untagged
+  m_TagString: Connector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   Child: {fileID: 7677422559914622420}
   PlusButton: {fileID: 2009536034764597800, guid: de30ccfc89995144caad3366361b07f6,
     type: 3}
+  Position: {x: 0, y: 0}
 --- !u!1 &3639314844442781783
 GameObject:
   m_ObjectHideFlags: 0

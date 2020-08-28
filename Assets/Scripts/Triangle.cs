@@ -3,8 +3,9 @@
 public class Triangle : MonoBehaviour
 {
     internal GameObject parent;
-    internal GameObject leftChild;
-    internal GameObject righcChild;
+
+    public GameObject leftChild;
+    public GameObject rightChild;
 
     public GameObject LeftSpawnPoint;
     public GameObject RightSpawnPoint;
@@ -80,6 +81,7 @@ public class Triangle : MonoBehaviour
         button.rotation = rotation;
         button.position = position;
         button.Position = point;
+        button.order = name == "left" ? (byte)1 : (byte)2;
 
     }
 
