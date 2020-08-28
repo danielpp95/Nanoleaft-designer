@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class triangle : MonoBehaviour
+public class Triangle : MonoBehaviour
 {
     internal GameObject parent;
     internal GameObject leftChild;
@@ -12,10 +12,27 @@ public class triangle : MonoBehaviour
 
     public Vector2Int Position;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public Colors Colors;
 
+    private TileMapController tileMapController;
+    private TriangleColorController triangleColorController;
+
+    void Awake()
+    {
+        this.tileMapController = GameObject.FindObjectOfType<TileMapController>();
+        this.triangleColorController = GameObject.FindObjectOfType<TriangleColorController>();
+    }
+
+    private void Start()
+    {
+        this.Colors = new Colors()
+        {
+            Color = Color.red,
+            CMYK = new CMYK(0, 1, 1, 0),
+            SliderValue = 0
+        };
+
+        this.ChangeColor();
     }
 
     public void Initialize()
@@ -41,22 +58,21 @@ public class triangle : MonoBehaviour
     {
         var point = this.GetPoint(name);
 
-        var tilemapController = GameObject.FindObjectOfType<TileMapController>();
-        var tile = tilemapController.GetTile(point.x, point.y);
+        var tile = this.tileMapController.GetTile(point.x, point.y);
 
         if (tile != TileEnum.None)
         {
             return;
         }
 
-        tilemapController.SetTile(point.x, point.y, TileEnum.PlusButton);
+        this.tileMapController.SetTile(point.x, point.y, TileEnum.PlusButton);
 
         var buttonGO = Instantiate(
             plusButton,
             transform.position,
             transform.rotation);
 
-        buttonGO.transform.parent = this.transform;
+        buttonGO.transform.parent = GameObject.FindGameObjectWithTag("Buttons").transform;
         buttonGO.name = name;
 
         var button = buttonGO.GetComponent<plusButton>();
@@ -165,6 +181,19 @@ public class triangle : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("click");
+        this.triangleColorController.SelectTriangle(this);
+    }
+
+    public void ChangeColor()
+    {
+        var renderers = this.GetComponentsInChildren<Renderer>();
+
+        foreach (var render in renderers)
+        {
+            var material = render.material;
+
+            material.color = this.Colors.Color;
+            render.material = material;
+        }
     }
 }

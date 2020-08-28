@@ -18,7 +18,7 @@ public class plusButton : MonoBehaviour
             this.transform.position,
             this.transform.rotation);
 
-        var trianglePF = triangleGO.GetComponent<triangle>();
+        var trianglePF = triangleGO.GetComponent<Triangle>();
         trianglePF.parent = this.parent;
         trianglePF.Position = this.Position;
         trianglePF.Initialize();

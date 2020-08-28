@@ -12,18 +12,11 @@ public class TileMapController : MonoBehaviour
 
     private TileMap tileMap;
 
-    // Start is called before the first frame update
     void Awake()
     {
         this.tileMap = new TileMap(xSize, ySize, Origin);
 
         this.InitializeTileMap();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void SetTile(int x, int y, TileEnum tileEnum)
